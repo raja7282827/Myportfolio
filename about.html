@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Santu Bar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-top: 100px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .nav-logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .nav-logo span {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link.active {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .nav-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white !important;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .home-btn:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .home-icon {
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+
+        .home-btn:hover .home-icon {
+            transform: scale(1.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .profile-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .profile-section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-avatar:hover {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .profile-info h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .profile-info .title {
+            font-size: 1.3em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: #667eea;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .education-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9ff, #e8f0ff);
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .education-item:hover {
+            background: linear-gradient(135deg, #e8f0ff, #d8e8ff);
+            transform: translateX(10px);
+        }
+
+        .education-item h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .education-item .school {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .education-item .year {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .skill-category h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+
+        .workshops-list {
+            list-style: none;
+        }
+
+        .workshop-item {
+            background: linear-gradient(135deg, #fff5f5, #fff0f0);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #764ba2;
+            transition: all 0.3s ease;
+        }
+
+        .workshop-item:hover {
+            background: linear-gradient(135deg, #fff0f0, #ffe8e8);
+            transform: translateX(10px);
+        }
+
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .hobby-item {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .hobby-item:hover {
+            transform: translateY(-10px) rotate(3deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .hobby-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .languages {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .language-item {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .language-item:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #f8f9ff, #e8f0ff);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding-top: 80px;
+            }
+            
+            .nav-container {
+                padding: 12px 15px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .nav-link {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            
+            .home-btn span:last-child {
+                display: none;
+            }
+            
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-info {
+                justify-content: center;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <span>Santu Bar</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#" class="nav-link active">About</a>
+                    <a href="/" class="nav-link home-btn">
+                        <span class="home-icon">🏠</span>
+                        <span>Home</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <header class="header">
+            <h1 style="color: white; font-size: 3em; margin-bottom: 10px;">About Me</h1>
+            <p style="color: rgba(255,255,255,0.9); font-size: 1.2em;">Passionate Programmer & Technology Enthusiast</p>
+        </header>
+
+        <section class="profile-section">
+            <div class="profile-header">
+                <div class="profile-avatar">SB</div>
+                <div class="profile-info">
+                    <h1>Santu Bar</h1>
+                    <div class="title">PROGRAMMER</div>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>📍</span> East Mednipur - 721431
+                        </div>
+                        <div class="contact-item">
+                            <span>📞</span> 6294974031
+                        </div>
+                        <div class="contact-item">
+                            <span>✉️</span> sbar5818@gmail.com
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="font-size: 1.1em; line-height: 1.6; color: #555;">
+                <strong>Career Objective:</strong> Pre-Final year Bachelor of Computer Applications student at Brainware University, 
+                passionate about programming and technology. With a strong foundation in coding and problem-solving, 
+                I aspire to become a skilled programmer and secure a tech job.
+            </div>
+        </section>
+
+        <div class="grid">
+            <section class="section">
+                <h2>🎓 Education</h2>
+                <div class="education-item">
+                    <h4>Bachelor of Computer Applications (BCA)</h4>
+                    <div class="school">Brainware University, Kolkata</div>
+                    <div class="year">2023 - 2026</div>
+                </div>
+                <div class="education-item">
+                    <h4>Higher Secondary (Class 12)</h4>
+                    <div class="school">Khejuri Janakalyan Siksha Sadan</div>
+                    <div class="year">2022</div>
+                </div>
+                <div class="education-item">
+                    <h4>Secondary Education (Class 10)</h4>
+                    <div class="school">Khejuri Janakalyan Siksha Sadan</div>
+                    <div class="year">2020</div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>💼 Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Frontend Development</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Backend Development</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Node.js</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Programming Languages</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Java</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Databases</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">MongoDB</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Soft Skills</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Problem-Solving</span>
+                            <span class="skill-tag">Team Collaboration</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="section">
+            <h2>🏆 Workshops & Seminars</h2>
+            <ul class="workshops-list">
+                <li class="workshop-item">
+                    <strong>Neurons and Tokens:</strong> A Practical Workshop on Machine Learning, Deep Learning, LLMs and Generative AI (MAR 2025)
+                </li>
+                <li class="workshop-item">
+                    <strong>Ethical Use of AI:</strong> Role of Library in Literature Review for Research (MAY 2025)
+                </li>
+                <li class="workshop-item">
+                    <strong>Empathy and Respect:</strong> The Foundation of Inclusion (APR 2025)
+                </li>
+                <li class="workshop-item">
+                    <strong>TechFusion:</strong> A Seminar on Industrial Automation and IoT (FEB 2025)
+                </li>
+            </ul>
+        </section>
+
+        <div class="grid">
+            <section class="section">
+                <h2>🎯 Hobbies & Interests</h2>
+                <div class="hobbies-grid">
+                    <div class="hobby-item">
+                        <div class="hobby-icon">🎮</div>
+                        <div>Playing and Exploring Online Games</div>
+                    </div>
+                    <div class="hobby-item">
+                        <div class="hobby-icon">💼</div>
+                        <div>Learning About Business & Entrepreneurship</div>
+                    </div>
+                    <div class="hobby-item">
+                        <div class="hobby-icon">🏏</div>
+                        <div>Playing Cricket</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🌍 Languages</h2>
+                <div class="languages">
+                    <div class="language-item">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🇮🇳</div>
+                        <strong>Hindi</strong>
+                    </div>
+                    <div class="language-item">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🇬🇧</div>
+                        <strong>English</strong>
+                    </div>
+                    <div class="language-item">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🇧🇩</div>
+                        <strong>Bengali</strong>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll effect for better user experience
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 100) {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                    navbar.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.15)';
+                } else {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                    navbar.style.boxShadow = '0 5px 25px rgba(0, 0, 0, 0.1)';
+                }
+            });
+
+            // Add animation delay to cards
+            const cards = document.querySelectorAll('.card, .education-item, .workshop-item');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.style.animation = 'fadeInUp 0.8s ease-out both';
+            });
+
+            // Parallax effect on scroll
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const sections = document.querySelectorAll('.section');
+                
+                sections.forEach((section, index) => {
+                    const rate = scrolled * -0.5;
+                    section.style.transform = `translateY(${rate * 0.1}px)`;
+                });
+            });
+
+            // Interactive hover effects
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach(tag => {
+                tag.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.1) rotate(5deg)';
+                });
+                
+                tag.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+
+            // Profile avatar animation
+            const avatar = document.querySelector('.profile-avatar');
+            let rotateAngle = 0;
+            
+            avatar.addEventListener('click', function() {
+                rotateAngle += 360;
+                this.style.transform = `rotate(${rotateAngle}deg) scale(1.2)`;
+                setTimeout(() => {
+                    this.style.transform = `rotate(${rotateAngle}deg) scale(1)`;
+                }, 300);
+            });
+
+            // Typing effect for title
+            const title = document.querySelector('.profile-info .title');
+            const originalText = title.textContent;
+            title.textContent = '';
+            
+            let i = 0;
+            const typeWriter = () => {
+                if (i < originalText.length) {
+                    title.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            };
+            
+            setTimeout(typeWriter, 1000);
+        });
+    </script>
+</body>
+</html>

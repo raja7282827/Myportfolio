@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santu Bar - Full Stack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Santu.dev</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" onclick="showSection('home')" class="nav-link active">Home</a></li>
+                <li><a href="about.html" onclick="showSection('about')" class="nav-link">About</a></li>
+                <li><a href="#" onclick="showSection('services')" class="nav-link">Services</a></li>
+                <li><a href="#" onclick="showSection('projects')" class="nav-link">Projects</a></li>
+                <li><a href="contact.html" onclick="showSection('contact')" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h1>Hi, I'm <span class="highlight">Santu Bar</span></h1>
+                <p>A passionate <span id="typed-text">Full Stack Developer</span></p>
+                <p>Transforming ideas into beautiful, functional web applications using modern technologies like HTML, CSS, JavaScript, Node.js, Python, Java, and databases.</p>
+                <div class="btn-group">
+                    <a href="Santu-Bar.pdf" download class="btn btn-primary">
+                        <i class="fas fa-download"></i> Download Resume
+                    </a>
+                    <a href="#" onclick="showSection('projects')" class="btn btn-secondary">
+                        <i class="fas fa-eye"></i> View Projects
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image fade-in-up">
+                <div class="developer-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>About Me</h2>
+                <p>Get to know more about my journey, skills, and passion for development</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="profile-card">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                </div>
+                
+                <div class="about-text">
+                    <h3>Santu Bar - Pre-Final Year BCA Student</h3>
+                    <p>I'm a passionate programmer currently pursuing my Bachelor of Computer Applications at Brainware University, Kolkata. With a strong foundation in multiple programming languages and modern web technologies, I love creating innovative solutions and learning new technologies.</p>
+                    
+                    <p>My journey began with curiosity about how websites work, and now I'm proficient in frontend technologies like HTML, CSS, JavaScript, and backend technologies like Node.js and Python. I also work with databases like MySQL and MongoDB.</p>
+                    
+                    <p>I believe in continuous learning and staying updated with the latest industry trends. My goal is to become a skilled full-stack developer and contribute to meaningful projects that make a difference.</p>
+                    
+                    <div class="btn-group">
+                        <a href="#" onclick="showSection('contact')" class="btn btn-primary">Get In Touch</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">7+</div>
+                    <div class="stat-label">Programming Languages</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3+</div>
+                    <div class="stat-label">Years of Learning</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">Workshops Attended</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>My Services</h2>
+                <p>What I can do for you - from web development to database management</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Frontend Development</h3>
+                    <p>Creating responsive and interactive user interfaces using HTML5, CSS3, and JavaScript. Ensuring cross-browser compatibility and mobile responsiveness.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Backend Development</h3>
+                    <p>Building robust server-side applications using Node.js and Python. Creating APIs and handling server logic for web applications.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Database Management</h3>
+                    <p>Designing and managing databases using MySQL and MongoDB. Optimizing queries and ensuring data integrity and security.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Full Stack Solutions</h3>
+                    <p>End-to-end web application development combining frontend and backend technologies for complete digital solutions.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Responsive Design</h3>
+                    <p>Creating websites that work perfectly on all devices - desktop, tablet, and mobile. Ensuring optimal user experience across platforms.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Problem Solving</h3>
+                    <p>Debugging and optimizing existing applications. Finding efficient solutions to complex programming challenges.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>My Projects</h2>
+                <p>A showcase of my work and the technologies I've mastered</p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Portfolio Website</h3>
+                        <p>A responsive personal portfolio website built with HTML, CSS, and JavaScript featuring modern design and smooth animations.</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Responsive</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>E-Commerce Platform</h3>
+                        <p>A full-stack e-commerce solution with user authentication, product catalog, shopping cart, and payment integration.</p>
+                        <div class="project-tags">
+                            <span class="tag">Node.js</span>
+                            <span class="tag">MongoDB</span>
+                            <span class="tag">Express</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Task Management App</h3>
+                        <p>A productivity application for managing tasks with features like priority setting, due dates, and progress tracking.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Data Visualization Dashboard</h3>
+                        <p>Interactive dashboard for data analysis and visualization using modern charting libraries and responsive design.</p>
+                        <div class="project-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Chart.js</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">CSS3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Student Management System</h3>
+                        <p>A comprehensive system for managing student records, grades, and academic information with secure authentication.</p>
+                        <div class="project-tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">JSP</span>
+                            <span class="tag">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-blog"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Personal Blog Platform</h3>
+                        <p>A dynamic blogging platform with content management system, user comments, and social media integration.</p>
+                        <div class="project-tags">
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Express</span>
+                            <span class="tag">MongoDB</span>
+                            <span class="tag">EJS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Get In Touch</h2>
+                <p>Let's discuss your next project or just say hello!</p>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong><br>
+                            sbar5818@gmail.com
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Phone</strong><br>
+                            +91 6294974031
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Location</strong><br>
+                            East Mednipur, West Bengal, India
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="Enter subject" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Santu Bar. All rights reserved. Made with <i class="fas fa-heart"></i> and lots of <i class="fas fa-coffee"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
