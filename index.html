@@ -8,7 +8,218 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #ffd700;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Bubbles Canvas */
+        #bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Main Content */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .highlight {
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        #typed-text {
+            color: #ff6b6b;
+            font-weight: 600;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(0, 0, 0, 0.9);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -28,6 +239,8 @@
         </div>
     </nav>
 
+    <canvas id="bubbles"></canvas>
+
     <!-- Home Section -->
     <section id="home" class="section active">
         <div class="container">
@@ -36,7 +249,7 @@
                 <p>A passionate <span id="typed-text">Full Stack Developer</span></p>
                 <p>Transforming ideas into beautiful, functional web applications using modern technologies like HTML, CSS, JavaScript, Node.js, Python, Java, and databases.</p>
                 <div class="btn-group">
-                    <a href="Santu-Bar.pdf" download class="btn btn-primary">
+                    <a href="SANTU_BAR_009.pdf" download class="btn btn-primary">
                         <i class="fas fa-download"></i> Download Resume
                     </a>
                     <a href="#" onclick="showSection('projects')" class="btn btn-secondary">
@@ -44,316 +257,287 @@
                     </a>
                 </div>
             </div>
-            <div class="hero-image fade-in-up">
-                <div class="developer-icon">
-                    <i class="fas fa-code"></i>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="section-heading">
-                <h2>About Me</h2>
-                <p>Get to know more about my journey, skills, and passion for development</p>
-            </div>
-            
-            <div class="about-content">
-                <div class="about-image">
-                    <div class="profile-card">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
-                </div>
+    <script>
+        // Bubble Animation
+        class BubbleSystem {
+            constructor() {
+                this.canvas = document.getElementById('bubbles');
+                this.ctx = this.canvas.getContext('2d');
+                this.bubbles = [];
+                this.mouseX = 0;
+                this.mouseY = 0;
+                this.isMouseDown = false;
                 
-                <div class="about-text">
-                    <h3>Santu Bar - Pre-Final Year BCA Student</h3>
-                    <p>I'm a passionate programmer currently pursuing my Bachelor of Computer Applications at Brainware University, Kolkata. With a strong foundation in multiple programming languages and modern web technologies, I love creating innovative solutions and learning new technologies.</p>
+                this.init();
+                this.setupEventListeners();
+                this.animate();
+            }
+
+            init() {
+                this.resizeCanvas();
+                this.createBubbles(50);
+            }
+
+            resizeCanvas() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+
+            createBubbles(count) {
+                for (let i = 0; i < count; i++) {
+                    this.bubbles.push({
+                        x: Math.random() * this.canvas.width,
+                        y: Math.random() * this.canvas.height,
+                        radius: Math.random() * 20 + 5,
+                        vx: (Math.random() - 0.5) * 2,
+                        vy: (Math.random() - 0.5) * 2,
+                        alpha: Math.random() * 0.5 + 0.1,
+                        hue: Math.random() * 360,
+                        repelForce: 0,
+                        originalVx: (Math.random() - 0.5) * 2,
+                        originalVy: (Math.random() - 0.5) * 2
+                    });
+                }
+            }
+
+            setupEventListeners() {
+                // Mouse events
+                document.addEventListener('mousemove', (e) => {
+                    this.mouseX = e.clientX;
+                    this.mouseY = e.clientY;
+                });
+
+                document.addEventListener('mousedown', () => {
+                    this.isMouseDown = true;
+                    this.createMouseBubbles();
+                });
+
+                document.addEventListener('mouseup', () => {
+                    this.isMouseDown = false;
+                });
+
+                // Touch events
+                document.addEventListener('touchstart', (e) => {
+                    const touch = e.touches[0];
+                    this.mouseX = touch.clientX;
+                    this.mouseY = touch.clientY;
+                    this.isMouseDown = true;
+                    this.createMouseBubbles();
+                    e.preventDefault();
+                });
+
+                document.addEventListener('touchmove', (e) => {
+                    const touch = e.touches[0];
+                    this.mouseX = touch.clientX;
+                    this.mouseY = touch.clientY;
+                    e.preventDefault();
+                });
+
+                document.addEventListener('touchend', () => {
+                    this.isMouseDown = false;
+                });
+
+                // Resize event
+                window.addEventListener('resize', () => {
+                    this.resizeCanvas();
+                });
+
+                // Hover effects on interactive elements
+                const interactiveElements = document.querySelectorAll('a, button, .nav-link');
+                interactiveElements.forEach(element => {
+                    element.addEventListener('mouseenter', (e) => {
+                        this.createHoverBubbles(e.target);
+                    });
+                });
+            }
+
+            createMouseBubbles() {
+                for (let i = 0; i < 5; i++) {
+                    this.bubbles.push({
+                        x: this.mouseX + (Math.random() - 0.5) * 50,
+                        y: this.mouseY + (Math.random() - 0.5) * 50,
+                        radius: Math.random() * 15 + 5,
+                        vx: (Math.random() - 0.5) * 8,
+                        vy: (Math.random() - 0.5) * 8,
+                        alpha: 0.8,
+                        hue: Math.random() * 60 + 300, // Purple to pink range
+                        life: 100,
+                        decay: 2,
+                        repelForce: 0,
+                        originalVx: (Math.random() - 0.5) * 8,
+                        originalVy: (Math.random() - 0.5) * 8
+                    });
+                }
+            }
+
+            createHoverBubbles(element) {
+                const rect = element.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                for (let i = 0; i < 8; i++) {
+                    this.bubbles.push({
+                        x: centerX + (Math.random() - 0.5) * rect.width,
+                        y: centerY + (Math.random() - 0.5) * rect.height,
+                        radius: Math.random() * 10 + 3,
+                        vx: (Math.random() - 0.5) * 4,
+                        vy: (Math.random() - 0.5) * 4,
+                        alpha: 0.6,
+                        hue: 45, // Golden color
+                        life: 60,
+                        decay: 1.5,
+                        repelForce: 0,
+                        originalVx: (Math.random() - 0.5) * 4,
+                        originalVy: (Math.random() - 0.5) * 4
+                    });
+                }
+            }
+
+            updateBubbles() {
+                for (let i = this.bubbles.length - 1; i >= 0; i--) {
+                    const bubble = this.bubbles[i];
+
+                    // Calculate distance to mouse/touch
+                    const dx = this.mouseX - bubble.x;
+                    const dy = this.mouseY - bubble.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    // Repel effect
+                    if (distance < 100) {
+                        const repelStrength = (100 - distance) / 100;
+                        bubble.repelForce = repelStrength * 5;
+                        
+                        const angle = Math.atan2(dy, dx);
+                        bubble.vx = bubble.originalVx - Math.cos(angle) * bubble.repelForce;
+                        bubble.vy = bubble.originalVy - Math.sin(angle) * bubble.repelForce;
+                    } else {
+                        bubble.repelForce *= 0.95;
+                        bubble.vx = bubble.originalVx;
+                        bubble.vy = bubble.originalVy;
+                    }
+
+                    // Update position
+                    bubble.x += bubble.vx;
+                    bubble.y += bubble.vy;
+
+                    // Bounce off edges
+                    if (bubble.x < 0 || bubble.x > this.canvas.width) {
+                        bubble.vx *= -1;
+                        bubble.originalVx *= -1;
+                    }
+                    if (bubble.y < 0 || bubble.y > this.canvas.height) {
+                        bubble.vy *= -1;
+                        bubble.originalVy *= -1;
+                    }
+
+                    // Handle temporary bubbles (from interactions)
+                    if (bubble.life !== undefined) {
+                        bubble.life -= bubble.decay;
+                        bubble.alpha = Math.max(0, bubble.life / 100);
+                        
+                        if (bubble.life <= 0) {
+                            this.bubbles.splice(i, 1);
+                            continue;
+                        }
+                    }
+
+                    // Keep bubble count manageable
+                    if (this.bubbles.length > 200) {
+                        this.bubbles.splice(i, 1);
+                    }
+                }
+            }
+
+            drawBubbles() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+                this.bubbles.forEach(bubble => {
+                    this.ctx.save();
+                    this.ctx.globalAlpha = bubble.alpha;
                     
-                    <p>My journey began with curiosity about how websites work, and now I'm proficient in frontend technologies like HTML, CSS, JavaScript, and backend technologies like Node.js and Python. I also work with databases like MySQL and MongoDB.</p>
+                    // Create gradient
+                    const gradient = this.ctx.createRadialGradient(
+                        bubble.x, bubble.y, 0,
+                        bubble.x, bubble.y, bubble.radius
+                    );
                     
-                    <p>I believe in continuous learning and staying updated with the latest industry trends. My goal is to become a skilled full-stack developer and contribute to meaningful projects that make a difference.</p>
+                    gradient.addColorStop(0, `hsla(${bubble.hue}, 70%, 80%, 0.8)`);
+                    gradient.addColorStop(0.7, `hsla(${bubble.hue}, 70%, 60%, 0.4)`);
+                    gradient.addColorStop(1, `hsla(${bubble.hue}, 70%, 40%, 0.1)`);
                     
-                    <div class="btn-group">
-                        <a href="#" onclick="showSection('contact')" class="btn btn-primary">Get In Touch</a>
-                    </div>
-                </div>
-            </div>
+                    this.ctx.fillStyle = gradient;
+                    this.ctx.beginPath();
+                    this.ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
+                    this.ctx.fill();
 
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number">7+</div>
-                    <div class="stat-label">Programming Languages</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">10+</div>
-                    <div class="stat-label">Projects Completed</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">3+</div>
-                    <div class="stat-label">Years of Learning</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">4+</div>
-                    <div class="stat-label">Workshops Attended</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="section">
-        <div class="container">
-            <div class="section-heading">
-                <h2>My Services</h2>
-                <p>What I can do for you - from web development to database management</p>
-            </div>
-
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Frontend Development</h3>
-                    <p>Creating responsive and interactive user interfaces using HTML5, CSS3, and JavaScript. Ensuring cross-browser compatibility and mobile responsiveness.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-server"></i>
-                    </div>
-                    <h3>Backend Development</h3>
-                    <p>Building robust server-side applications using Node.js and Python. Creating APIs and handling server logic for web applications.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3>Database Management</h3>
-                    <p>Designing and managing databases using MySQL and MongoDB. Optimizing queries and ensuring data integrity and security.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3>Full Stack Solutions</h3>
-                    <p>End-to-end web application development combining frontend and backend technologies for complete digital solutions.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Responsive Design</h3>
-                    <p>Creating websites that work perfectly on all devices - desktop, tablet, and mobile. Ensuring optimal user experience across platforms.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <h3>Problem Solving</h3>
-                    <p>Debugging and optimizing existing applications. Finding efficient solutions to complex programming challenges.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <div class="container">
-            <div class="section-heading">
-                <h2>My Projects</h2>
-                <p>A showcase of my work and the technologies I've mastered</p>
-            </div>
-
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Portfolio Website</h3>
-                        <p>A responsive personal portfolio website built with HTML, CSS, and JavaScript featuring modern design and smooth animations.</p>
-                        <div class="project-tags">
-                            <span class="tag">HTML5</span>
-                            <span class="tag">CSS3</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Responsive</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>E-Commerce Platform</h3>
-                        <p>A full-stack e-commerce solution with user authentication, product catalog, shopping cart, and payment integration.</p>
-                        <div class="project-tags">
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MongoDB</span>
-                            <span class="tag">Express</span>
-                            <span class="tag">JavaScript</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Task Management App</h3>
-                        <p>A productivity application for managing tasks with features like priority setting, due dates, and progress tracking.</p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">MySQL</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Bootstrap</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Data Visualization Dashboard</h3>
-                        <p>Interactive dashboard for data analysis and visualization using modern charting libraries and responsive design.</p>
-                        <div class="project-tags">
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Chart.js</span>
-                            <span class="tag">MySQL</span>
-                            <span class="tag">CSS3</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Student Management System</h3>
-                        <p>A comprehensive system for managing student records, grades, and academic information with secure authentication.</p>
-                        <div class="project-tags">
-                            <span class="tag">Java</span>
-                            <span class="tag">MySQL</span>
-                            <span class="tag">JSP</span>
-                            <span class="tag">Bootstrap</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-blog"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Personal Blog Platform</h3>
-                        <p>A dynamic blogging platform with content management system, user comments, and social media integration.</p>
-                        <div class="project-tags">
-                            <span class="tag">Node.js</span>
-                            <span class="tag">Express</span>
-                            <span class="tag">MongoDB</span>
-                            <span class="tag">EJS</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <div class="section-heading">
-                <h2>Get In Touch</h2>
-                <p>Let's discuss your next project or just say hello!</p>
-            </div>
-
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
+                    // Add a subtle border
+                    this.ctx.strokeStyle = `hsla(${bubble.hue}, 70%, 90%, 0.3)`;
+                    this.ctx.lineWidth = 1;
+                    this.ctx.stroke();
                     
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <strong>Email</strong><br>
-                            sbar5818@gmail.com
-                        </div>
-                    </div>
+                    this.ctx.restore();
+                });
+            }
 
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <strong>Phone</strong><br>
-                            +91 6294974031
-                        </div>
-                    </div>
+            animate() {
+                this.updateBubbles();
+                this.drawBubbles();
+                requestAnimationFrame(() => this.animate());
+            }
+        }
 
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <strong>Location</strong><br>
-                            East Mednipur, West Bengal, India
-                        </div>
-                    </div>
+        // Navigation functions (placeholder)
+        function showSection(section) {
+            console.log(`Showing section: ${section}`);
+            // Add your section switching logic here
+        }
 
-                    <div class="social-links">
-                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
 
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" placeholder="Enter your name" required>
-                        </div>
+        // Initialize bubble system when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new BubbleSystem();
+        });
 
-                        <div class="form-group">
-                            <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                        </div>
+        // Typing effect for the text
+        function typeText() {
+            const texts = ['Full Stack Developer', 'Web Designer', 'Problem Solver', 'Tech Enthusiast'];
+            let textIndex = 0;
+            let charIndex = 0;
+            const typedElement = document.getElementById('typed-text');
 
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" placeholder="Enter subject" required>
-                        </div>
+            function type() {
+                if (charIndex < texts[textIndex].length) {
+                    typedElement.textContent += texts[textIndex].charAt(charIndex);
+                    charIndex++;
+                    setTimeout(type, 100);
+                } else {
+                    setTimeout(erase, 2000);
+                }
+            }
 
-                        <div class="form-group">
-                            <label for="message">Your Message</label>
-                            <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
-                        </div>
+            function erase() {
+                if (charIndex > 0) {
+                    typedElement.textContent = texts[textIndex].substring(0, charIndex - 1);
+                    charIndex--;
+                    setTimeout(erase, 50);
+                } else {
+                    textIndex = (textIndex + 1) % texts.length;
+                    setTimeout(type, 500);
+                }
+            }
 
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+            type();
+        }
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2025 Santu Bar. All rights reserved. Made with <i class="fas fa-heart"></i> and lots of <i class="fas fa-coffee"></i></p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+        // Start typing effect
+        setTimeout(typeText, 1000);
+    </script>
 </body>
 </html>
